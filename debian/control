@@ -8,5 +8,5 @@ Standards-Version: 3.9.5
 Package: qsg-overostorm
 Architecture: all
 Depends: ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Description: Quick-start guide for Gumstix OveroSTORM
+ Quick-start guide for Gumstix OveroSTORM

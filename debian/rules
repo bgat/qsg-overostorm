@@ -1,4 +1,13 @@
 #!/usr/bin/make -f
+export DH_VERBOSE=1
+
 
 %:
 	dh $@ 
+
+# TODO: xhtml?
+%.html : %.asciidoc
+	asciidoc --conf-file=asciidoc.conf --out-file=$@ $^
+
+override_dh_auto_build: qsg-overostorm.html
+
