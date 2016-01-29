@@ -40,6 +40,7 @@ A basic Pragmatux Workstation installation provides a pre-packaged SDK
 and related tools for supported devices including the Overo Storm. To
 install it:
 
++
 ....
 $ sudo apt-get update
 $ sudo apt-get install ptux-sdk-overostorm
@@ -58,7 +59,7 @@ some packages without authentication.
 ....
 $ mkdir overostorm
 $ cd overostorm
-$ sudo mkos-overostorm
+$ sudo fakeroot mkos-overostorm
 ....
 +
 This command creates 'ptux.img', a bootable SD card image for the
@@ -124,6 +125,7 @@ board.
 The output should look similar to the following.  You should also see
 the blinking "heartbeat" LED on the Tobi board:
 
++
 ....
 Setting up ncurses-base (5.7+20100313-5em1) ...
 Setting up sensible-utils (0.0.4em1) ...
@@ -133,6 +135,7 @@ Setting up sshd-run (1.0) ...
 Setting up linux-overostorm (...) ...
 [....]
 ....
++
 
 The installation generates much debugging, informational, and warning
 output due to the state of the system at installation time and the
@@ -148,13 +151,14 @@ command shell is offered on the serial console. The only account which
 exists following a basic installation is 'root' with the password
 'password'.
 
++
 ....
 Pragmatux 3.0 device ttyO2
 
 device login: root
 Password: password
 ....
-
++
 
 == Enabling root login over SSH
 
@@ -162,7 +166,7 @@ By default, Pragmatux devices permit root logins over SSH only via an
 authorized key. Password-authenticated logins are disabled, and are
 not generally recommended.
 
-. Authorized-key logins
+=== Authorized-key logins
 
 To allow root login via authorized key, add the contents of your
 personal 'id_rsa.pub' file to '/root/.ssh/authorized_keys' on the
@@ -175,34 +179,33 @@ device by:
 Create the 'authorized_keys' file if it doesn't already exist.
 
 
-. Password-authenticated logins
+=== Password-authenticated logins
 
 To enable password-authenticated root login, edit '/etc/ssh/sshd_config' as follows.
 
 Change this:
-....
 +
+....
 PermitRootLogin without-password
-+
 ....
++
 
 ... to this:
 
-....
 +
+....
 # PermitRootLogin without-password
 PermitRootLogin yes
-+
 ....
++
 
 Finally, restart the SSH server:
 
-....
 +
+....
 root@device:~# service sshd restart
-+
 ....
-
++
 
 == Log in via SSH
 
@@ -212,6 +215,7 @@ can use the 'ssh' program on your workstation to log into the device.
 If necessary, you can find out what IP address is assigned to the
 device from the serial console:
 
++
 ....
 Pragmatux 3.0 device ttyO2
 
@@ -223,6 +227,7 @@ root@device:~# ip addr show eth0
     inet 192.168.88.3/24 ...
     ...
 ....
++
 
 
 == Configuring WiFi
@@ -237,8 +242,8 @@ root@device:~# rfkill unblock all
 
 Next, use 'Connection Manager' to scan for access points:
 
-....
 +
+....
 root@device:~# connmanctl
 connmanctl> scan wifi
 Scan completed for wifi
@@ -249,20 +254,21 @@ xfinitywifi    wifi_00198845cf8d_786e69747977696669_managed_none
                wifi_00198845cf8d_hidden_managed_psk
 TLA Guests     wifi_00198845cf8d_4346573747320323447_managed_psk
 connmanctl>
-+
 ....
++
 
 Finally, connect to the selected access point. You may use
 tab-completion to assist in typing the long station identifier:
 
-....
 +
+....
 connmanctl> connect wifi_00198845cf8d_434322e3447487a_managed_none
 [10992.965606] IPv6: ADDRCONF(NETDEV_CHANGE): wlan0: link becomes ready
 Connected wifi_00198845cf8d_434322e3447487a_managed_none
 connmanctl>
-+
 ....
++
+
 
 
 					     
